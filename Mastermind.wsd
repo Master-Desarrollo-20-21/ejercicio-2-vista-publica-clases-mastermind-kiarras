@@ -1,0 +1,44 @@
+@startuml Mastermind
+class Mastermind{
+  + start()
+  + exit()
+}
+Mastermind *--> "0..10" Attempt
+class Player{
+    +setProposedCombination()
+}
+Player o--> ProposedCombination
+abstract class Combination{
+    + setPosition() : Char[]
+    + show()
+}
+Combination *--> "4" Color
+enum Color{
+    Red = r
+    Yellow = y
+    Blue = b
+    Green = g
+    Purple = p
+    Orange = o
+}
+Combination <|-- SecretCombination
+Combination <|-- ProposedCombination
+Class SecretCombination{
+    + Ramdom()
+}
+
+class Attempt{
+    + getSecretCombination()
+    + getProposedCombiantion()
+    + getResult()
+}
+Attempt --> Result
+Attempt o--> SecretCombination
+Attempt --> ProposedCombination
+class Result{
+    +checkCombinations()
+    +resume()
+}
+Class GestorIO
+Attempt --> GestorIO
+@enduml
