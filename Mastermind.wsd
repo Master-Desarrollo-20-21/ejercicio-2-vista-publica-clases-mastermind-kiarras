@@ -11,7 +11,8 @@ class Game{
     + NewAttempt()
     + showSecretCombination() : string
     + showPreviousAttempts()
-    + Result()
+    - isFinist()
+    + showFinalResult()
 }
 Game *--> "0..10" Attempt
 Game *--> SecretCombination
@@ -53,7 +54,11 @@ class Result{
 }
 Result o--> SecretCombination
 Result o--> ProposedCombination
-
+Result *--> "4" wins
+enum wins{
+    blacks
+    whites
+}
 package IO{
     Class GestorIO{
         + input()
