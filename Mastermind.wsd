@@ -1,32 +1,29 @@
 @startuml Mastermind
 class Mastermind{
   + start()
-  - showTitle()
-  - exit()
+  - isResumed()
 }
 Mastermind *--> Game
 class Game{
-    + Attempt[] : Attempts
-    + SecretCombination : secretCombinaton
-    + NewAttempt()
-    + showSecretCombination() : string
-    + showPreviousAttempts()
-    - isFinist()
-    + showFinalResult()
+    + Attempts : Attempt[]
+    + play()
+    - showPreviousAttempts()
+    - finalResult() :String
 }
 Game *--> "0..10" Attempt
 Game *--> SecretCombination
 
 class Attempt{
-    - ProposedCombination : proposedCombination
-    - Result
-    + askProposedCombination() : Combination
+    - Result : int[]
+    + getProposedCombination()
+    + getAttempt() : String
 }
 Attempt *--> ProposedCombination
-Attempt *--> Result
+Attempt --> SecretCombination
 
 abstract class Combination{
-    + setPosition() : Char[]
+    + Code : String
+    + CharCode : Char[]
     {abstract} + show()
 }
 Combination *--> "4" Color
@@ -42,23 +39,13 @@ Combination <|-- SecretCombination
 Combination <|-- ProposedCombination
 Class SecretCombination{
     + setRamdomCombination()
+    + isEquals(ProposedCombination)
 }
 Class ProposedCombination{
-    - isValidLength()
-    - isValidColor() 
+    - isValid() : String
+    - isColorOK() : boolean
 }
 
-class Result{
-    +checkCombinations(ProposedCombination,SecretCombination)
-    +resume()
-}
-Result o--> SecretCombination
-Result o--> ProposedCombination
-Result *--> "4" wins
-enum wins{
-    blacks
-    whites
-}
 package IO{
     Class GestorIO{
         + input()
@@ -66,4 +53,7 @@ package IO{
     }
 }
 Attempt ...> GestorIO
+Game ...> GestorIO
+Mastermind ...> GestorIO
+ProposedCombination ...> GestorIO
 @enduml
