@@ -47,13 +47,13 @@ Class ProposedCombination{
 }
 
 package IO{
-    Class GestorIO{
+    Class Console{
         + input()
         + out()
     }
 }
-Attempt ...> GestorIO
-Game ...> GestorIO
-Mastermind ...> GestorIO
-ProposedCombination ...> GestorIO
+Attempt ...> Console
+Game ...> Console
+Mastermind ...> Console
+ProposedCombination ...> Console
 @enduml
